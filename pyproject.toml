@@ -1,0 +1,12 @@
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+py_version = "311"
+
+[tool.djlint]
+files=["templates/**/*.html"]
+profile="django"
+ignore = "H005,H016,H030,H031"
