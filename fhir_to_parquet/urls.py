@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import upload_fhir_file
+from .views import FHIRToParquetAPIView
 
 urlpatterns = [
-    path("upload/", upload_fhir_file, name="upload_fhir_file"),
+    path("convert/", FHIRToParquetAPIView.as_view(), name="convert_fhir_to_parquet"),
 ]
