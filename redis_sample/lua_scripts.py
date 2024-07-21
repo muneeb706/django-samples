@@ -1,7 +1,7 @@
 from django_redis import get_redis_connection
 
-# This implementation uses a Lua script with Redis to handle the 
-# ticket purchase atomically, preventing race conditions. 
+# This implementation uses a Lua script with Redis to handle the
+# ticket purchase atomically, preventing race conditions.
 # The sorted set is used implicitly by storing the purchasers for each event.
 
 TICKET_PURCHASE_SCRIPT = """
@@ -19,9 +19,10 @@ else
 end
 """
 
+
 def purchase_ticket(event_id, customer_username):
     redis_conn = get_redis_connection("default")
     event_key = f"event:{event_id}:available_tickets"
-    
+
     result = redis_conn.eval(TICKET_PURCHASE_SCRIPT, 1, event_key, customer_username)
     return result == 1
