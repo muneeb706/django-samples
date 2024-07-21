@@ -1,0 +1,29 @@
+{% url 'purchase_ticket' event.id as purchase_ticket %}
+<h1>{{ event.name }}</h1>
+<p>Available tickets: <span id="available-tickets">{{ event.available_tickets }}</span></p>
+<form id="purchase-form">
+    <input type="text" name="customer_username" placeholder="Your username">
+    <button type="submit">Purchase Ticket</button>
+</form>
+
+<script>
+document.getElementById('purchase-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('{{ purchase_ticket }}', {
+        method: 'POST',
+        body: new FormData(this),
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Ticket purchased successfully!');
+            document.getElementById('available-tickets').textContent--;
+        } else {
+            alert(data.message);
+        }
+    });
+});
+</script>

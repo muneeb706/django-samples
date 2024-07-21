@@ -1,0 +1,12 @@
+[
+    {
+      "model": "redis_sample.event",
+      "pk": 1,
+      "fields": {
+        "name": "Summer Music Festival",
+        "total_tickets": 10,
+        "available_tickets": 10
+      }
+    }
+    
+  ]
