@@ -1,18 +1,18 @@
 ---
 repos:
   - repo: https://github.com/psf/black-pre-commit-mirror
-    rev: 24.3.0
+    rev: 25.1.0
     hooks:
       - id: black
         language_version: python3.11
         
   - repo: https://github.com/PyCQA/isort
-    rev: 5.13.2
+    rev: 6.0.0
     hooks:
       - id: isort
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
+    rev: v5.0.0
     hooks:
       - id: requirements-txt-fixer
         files: requirements/.*\.txt$
@@ -26,12 +26,26 @@ repos:
       - id: detect-private-key
     
   - repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
+    rev: 7.1.1
     hooks:
       - id: flake8
   
   - repo: https://github.com/djlint/djLint
-    rev: v1.34.1
+    rev: v1.36.4
     hooks:
       - id: djlint-reformat-django
       - id: djlint-django
+  
+  # -   repo: https://github.com/adamchainz/django-upgrade
+  #     rev: "1.23.1"  # replace with latest tag on GitHub
+  #     hooks:
+  #     -   id: django-upgrade
+  #         args: [--target-version, "5.2"]   # Replace with Django version
+  
+  # local hooks
+  -   repo: /Users/muneeb706/Documents/github/muneeb706/django-upgrade-agent
+      rev: "ffb835ba64f88869589feb14627230d25b9427cf"
+      hooks:
+      -   id: django-upgrade
+          types: [python]
+          args: [--target-version, "5.1"]   # Replace with Django version
